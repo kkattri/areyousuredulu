@@ -9,11 +9,8 @@ const firebaseConfig = {
   measurementId: "G-LKBH3DHJMG"
 };
 
-// Initialize Firebase App
 const app = firebase.initializeApp(firebaseConfig);
-
-// Initialize Firestore Database
-const db = firebase.firestore();
+const db = firebase.firestore(); // Correctly initializes Firestore
 
 document.addEventListener('DOMContentLoaded', function () {
   // Password check for index.html
