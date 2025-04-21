@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('passwordForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const code = document.getElementById('password').value;
-      if (code === '2803') window.location.href = 'page2.html';
-      if (code === '1505') window.location.href = 'page3.html';
+      if (code === '2803') window.location.href = 'https://kkattri.github.io/oneyearduylan/page2.html';
+      if (code === '1505') window.location.href = 'https://kkattri.github.io/oneyearduylan/page3.html';
     });
   }
 
