@@ -1,0 +1,93 @@
+/* style.css */
+body {
+    font-family: 'Dancing Script', cursive;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+#password {
+    width: 80%;
+    padding: 15px;
+    margin: 20px 0;
+    border: 2px solid #ff6b6b;
+    border-radius: 25px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.submit-btn {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.romantic-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+.love-btn {
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.1em;
+}
+
+.message-box {
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #ff6b6b;
+    border-radius: 15px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1em;
+}
+
+.send-btn {
+    background: #4ecdc4;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    display: block;
+    margin: 20px auto;
+}
+
+.log-container {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff5f5;
+    border-radius: 15px;
+}
+
+.log-entry {
+    margin: 15px 0;
+    padding: 10px;
+    background: #ffe3e3;
+    border-radius: 10px;
+}
