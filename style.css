@@ -1,0 +1,101 @@
+/* General Styles */
+body {
+    font-family: 'Dancing Script', cursive;
+    background: #ffe6e6;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.glow {
+    color: #ff6b6b;
+    text-shadow: 0 0 10px rgba(255,107,107,0.5);
+}
+
+button {
+    background: #ff6b6b;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff4d4d;
+}
+
+.memory-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.memory-card {
+    background: #fff5f5;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.entry-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.entry {
+    background: #fff5f5;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.logout {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-size: 0.9em;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Secret Page Styles */
+.secret-bg {
+    background: #000;
+    color: #fff;
+}
+
+.secret-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px;
+}
+
+#password {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button#unlock {
+    background: #444;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}

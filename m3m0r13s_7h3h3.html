@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memories</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <div class="container">
+        <h1 class="glow">Our Special Moments</h1>
+        <div class="memory-gallery">
+            <div class="memory-card">
+                <img src="placeholder.jpg" alt="Memory">
+                <p>"I'll fill this with our adventures..."</p>
+            </div>
+            <div class="memory-card">
+                <img src="placeholder.jpg" alt="Memory">
+                <p>"...and all the moments in between"</p>
+            </div>
+        </div>
+        <a href="/s3cr3t.html" class="logout">Logout</a>
+    </div>
+    <script>
+        // Anti-guess protection
+        if(sessionStorage.getItem('access') !== '1596') {
+            window.location.href = '/s3cr3t.html';
+        }
+    </script>
+</body>
+</html>
