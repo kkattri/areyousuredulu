@@ -7,11 +7,22 @@
 </head>
 <body class="secret-bg">
     <div class="secret-container">
+        <!-- First Name Input -->
+        <input type="text" id="name" 
+               placeholder="Enter your first name" 
+               required>
+        
+        <!-- Password Input -->
         <input type="password" id="password" 
                placeholder="Enter code" 
                pattern="\d{4}" 
                maxlength="4" required>
-        <button id="unlock">▶</button>
+        
+        <!-- Unlock Button -->
+        <button id="unlock">Unlock</button>
+
+        <!-- Error Message -->
+        <p id="error-message" class="error-message"></p>
     </div>
     <script src="app.js"></script>
 </body>

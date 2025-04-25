@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timeline</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <div class="container">
+        <h1 class="glow">365 Days of Love</h1>
+        <div id="entries" class="entry-list"></div>
+        <div id="pagination" class="pagination"></div>
+        <a href="index.html" class="logout">Logout</a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        // Anti-guess protection
+        if (sessionStorage.getItem('access') !== '1505') {
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('entries');
+            const paginationContainer = document.getElementById('pagination');
+            let allEntries = []; // Store all entries globally
+            let sortOrder = 'asc'; // Default sort order: ascending (oldest first)
+            let currentPage = 1; // Current page number
+            const pageSize = 20; // Number of messages per page
+
+            // Function to parse and display data
+            function loadMessages() {
+                Papa.parse('data.csv', {
+                    download: true,
+                    header: true,
+                    complete: function (results) {
+                        console.log("Parsed CSV Data:", results); // Debugging: Log parsed data
+
+                        // Check for errors during parsing
+                        if (results.errors.length > 0) {
+                            console.error("CSV Parsing Errors:", results.errors);
+                            container.innerHTML = "<p>Error loading messages. Please check the console.</p>";
+                            return;
+                        }
+
+                        // Check if data is empty
+                        if (results.data.length === 0) {
+                            container.innerHTML = "<p>No messages found.</p>";
+                            return;
+                        }
+
+                        // Store all entries globally
+                        allEntries = results.data.map(entry => ({
+                            ...entry,
+                            dateTime: new Date(`${entry.Date} ${entry.Time}`) // Combine Date and Time into a single Date object
+                        }));
+
+                        // Render messages and pagination
+                        renderMessages();
+                        renderPagination();
+                    },
+                    error: function (error) {
+                        console.error("CSV Parsing Error:", error);
+                        container.innerHTML = "<p>Error loading messages. Please check the console.</p>";
+                    }
+                });
+            }
+
+            // Function to render messages
+            function renderMessages() {
+                // Clear the container
+                container.innerHTML = '';
+
+                // Sort entries based on Date and Time
+                const sortedEntries = [...allEntries].sort((a, b) => {
+                    return sortOrder === 'asc' ? a.dateTime - b.dateTime : b.dateTime - a.dateTime;
+                });
+
+                // Calculate the start and end indices for the current page
+                const startIndex = (currentPage - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                const paginatedEntries = sortedEntries.slice(startIndex, endIndex);
+
+                // Display each entry
+                paginatedEntries.forEach((entry) => {
+                    const div = document.createElement('div');
+                    div.className = 'entry';
+
+                    // Ensure all fields exist before accessing them
+                    const stillLoveHer = entry['Do I still love her?'] || 'Unknown';
+                    const message = entry.Message || 'No message available';
+                    const date = entry.Date || 'Unknown date';
+                    const time = entry.Time || 'Unknown time';
+
+                    div.innerHTML = `
+                        <h3>Does Krishi still love you? <span class="response">${stillLoveHer}</span></h3>
+                        <p>${message}</p>
+                        <small>${date} at ${time}</small>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            // Function to render pagination
+            function renderPagination() {
+                paginationContainer.innerHTML = ''; // Clear existing pagination
+
+                // Calculate total pages
+                const totalPages = Math.ceil(allEntries.length / pageSize);
+
+                // Add pagination buttons
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.style.margin = '5px';
+                    button.style.padding = '5px 10px';
+                    button.style.backgroundColor = i === currentPage ? '#ff6b6b' : '#ddd';
+                    button.style.color = i === currentPage ? 'white' : 'black';
+                    button.style.border = 'none';
+                    button.style.borderRadius = '5px';
+                    button.style.cursor = 'pointer';
+
+                    button.addEventListener('click', () => {
+                        currentPage = i; // Update current page
+                        renderMessages(); // Re-render messages
+                        renderPagination(); // Re-render pagination
+                    });
+
+                    paginationContainer.appendChild(button);
+                }
+            }
+
+            // Add a button to toggle sort order
+            const sortButton = document.createElement('button');
+            sortButton.textContent = 'Sort by Newest First';
+            sortButton.style.marginBottom = '20px';
+            sortButton.style.padding = '10px 20px';
+            sortButton.style.backgroundColor = '#ff6b6b';
+            sortButton.style.color = 'white';
+            sortButton.style.border = 'none';
+            sortButton.style.borderRadius = '5px';
+            sortButton.style.cursor = 'pointer';
+
+            sortButton.addEventListener('click', () => {
+                // Toggle sort order
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                sortButton.textContent = sortOrder === 'asc' 
+                    ? 'Sort by Newest First' 
+                    : 'Sort by Oldest First';
+
+                // Reset to the first page after sorting
+                currentPage = 1;
+
+                // Re-render messages and pagination
+                renderMessages();
+                renderPagination();
+            });
+
+            // Append the sort button to the container
+            document.querySelector('.container').prepend(sortButton);
+
+            // Load messages initially
+            loadMessages();
+        });
+    </script>
+</body>
+</html>

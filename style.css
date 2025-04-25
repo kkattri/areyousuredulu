@@ -59,6 +59,7 @@ button:hover {
     margin: 10px 0;
     padding: 15px;
     border-radius: 10px;
+    position: relative; /* Added for alignment flexibility */
 }
 
 .logout {
@@ -81,7 +82,9 @@ button:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    flex-direction: column; /* Stack inputs vertically */
     gap: 10px;
+    width: 300px; /* Fixed width for better alignment */
 }
 
 #password {
@@ -90,6 +93,8 @@ button:hover {
     color: #fff;
     padding: 10px;
     border-radius: 5px;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 button#unlock {
@@ -98,4 +103,81 @@ button#unlock {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%; /* Full width */
+}
+
+/* New Styles for Two-Row Input System */
+.secret-container input {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Space between inputs */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* New Styles for Response Alignment */
+.response {
+    float: right; /* Aligns the response to the right */
+    font-weight: bold;
+    color: #ff6b6b; /* Romantic pink color */
+    font-size: 1.2em; /* Slightly larger for emphasis */
+}
+
+h3 {
+    font-size: 1.5em;
+    margin: 0 0 10px 0; /* Adjust spacing for better alignment */
+    display: flex;
+    justify-content: space-between; /* Ensures text and response are spaced apart */
+    align-items: center; /* Vertically centers the text and response */
+}
+
+/* Split Container for Two Columns */
+.split-container {
+    display: flex;
+    gap: 20px; /* Space between columns */
+    margin-top: 20px;
+}
+
+/* Left Column: Text */
+.text-column {
+    flex: 1; /* Takes up half the width */
+    background: #fff5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 600px; /* Limit height for scrolling */
+}
+
+.text-column p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Right Column: Images */
+.image-column {
+    flex: 1; /* Takes up half the width */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between images */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 600px; /* Limit height for scrolling */
+}
+
+.image-column img {
+    width: 100%; /* Ensure images fit within the column */
+    border-radius: 10px;
+    object-fit: cover; /* Maintain aspect ratio */
+    height: 150px; /* Fixed height for consistency */
 }
