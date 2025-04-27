@@ -23,7 +23,7 @@
             const container = document.getElementById('entries');
             const paginationContainer = document.getElementById('pagination');
             let allEntries = []; // Store all entries globally
-            let sortOrder = 'asc'; // Default sort order: ascending (oldest first)
+            let sortOrder = 'desc'; // Default sort order: newest first
             let currentPage = 1; // Current page number
             const pageSize = 20; // Number of messages per page
 
@@ -131,7 +131,7 @@
 
             // Add a button to toggle sort order
             const sortButton = document.createElement('button');
-            sortButton.textContent = 'Sort by Newest First';
+            sortButton.textContent = 'Sort by Oldest First'; // Default is newest first
             sortButton.style.marginBottom = '20px';
             sortButton.style.padding = '10px 20px';
             sortButton.style.backgroundColor = '#ff6b6b';

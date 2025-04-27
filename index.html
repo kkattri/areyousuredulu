@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Verification</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <meta name="robots" content="noindex, nofollow">
 </head>
-<body class="secret-bg">
-    <div class="secret-container">
-        <!-- First Name Input -->
-        <input type="text" id="name" 
-               placeholder="Enter your first name" 
-               required>
-        
-        <!-- Password Input -->
-        <input type="password" id="password" 
-               placeholder="Enter code" 
-               pattern="\d{4}" 
-               maxlength="4" required>
-        
-        <!-- Unlock Button -->
-        <button id="unlock">Unlock</button>
-
-        <!-- Error Message -->
-        <p id="error-message" class="error-message"></p>
+<body>
+    <div class="container">
+        <h1 class="glow">Enter Password</h1>
+        <input type="password" id="password" placeholder="Password">
+        <small style="display: block; margin-top: 5px; color: gray;">I use this password everywhere ;)</small>
+        <button id="submit">Submit</button>
     </div>
-    <script src="app.js"></script>
+    <script>
+        document.getElementById('submit').addEventListener('click', () => {
+            const password = document.getElementById('password').value;
+            if (password === '1505') { // Replace '1505' with your actual password
+                sessionStorage.setItem('access', '1505');
+                window.location.href = 'timeline.html';
+            } else {
+                alert('Incorrect password. Try again.');
+            }
+        });
+    </script>
 </body>
 </html>
