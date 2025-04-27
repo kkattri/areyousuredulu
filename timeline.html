@@ -27,6 +27,37 @@
             let currentPage = 1; // Current page number
             const pageSize = 20; // Number of messages per page
 
+            // Function to validate and fix CSV data
+            function validateAndFixData(data) {
+                const fixedData = [];
+                let hasFixes = false;
+
+                data.forEach((row, index) => {
+                    const fixedRow = {
+                        'Do I still love her?': row['Do I still love her?'] || 'Unknown',
+                        Message: row.Message || 'No message available',
+                        Date: row.Date && !isNaN(new Date(row.Date).getTime()) ? row.Date : 'Unknown date',
+                        Time: row.Time && /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/.test(row.Time) ? row.Time : 'Unknown time'
+                    };
+
+                    // Check if any fixes were applied
+                    if (fixedRow['Do I still love her?'] === 'Unknown' ||
+                        fixedRow.Message === 'No message available' ||
+                        fixedRow.Date === 'Unknown date' ||
+                        fixedRow.Time === 'Unknown time') {
+                        hasFixes = true;
+                    }
+
+                    fixedData.push(fixedRow);
+                });
+
+                if (hasFixes) {
+                    console.warn("CSV Fixes Applied: Some fields were missing or invalid.");
+                }
+
+                return fixedData;
+            }
+
             // Function to parse and display data
             function loadMessages() {
                 Papa.parse('data.csv', {
@@ -48,8 +79,11 @@
                             return;
                         }
 
+                        // Validate and fix data
+                        const fixedData = validateAndFixData(results.data);
+
                         // Store all entries globally
-                        allEntries = results.data.map(entry => ({
+                        allEntries = fixedData.map(entry => ({
                             ...entry,
                             dateTime: new Date(`${entry.Date} ${entry.Time}`) // Combine Date and Time into a single Date object
                         }));
@@ -85,16 +119,10 @@
                     const div = document.createElement('div');
                     div.className = 'entry';
 
-                    // Ensure all fields exist before accessing them
-                    const stillLoveHer = entry['Do I still love her?'] || 'Unknown';
-                    const message = entry.Message || 'No message available';
-                    const date = entry.Date || 'Unknown date';
-                    const time = entry.Time || 'Unknown time';
-
                     div.innerHTML = `
-                        <h3>Does Krishi still love you? <span class="response">${stillLoveHer}</span></h3>
-                        <p>${message}</p>
-                        <small>${date} at ${time}</small>
+                        <h3>Does Krishi still love you? <span class="response">${entry['Do I still love her?']}</span></h3>
+                        <p>${entry.Message}</p>
+                        <small>${entry.Date} at ${entry.Time}</small>
                     `;
                     container.appendChild(div);
                 });
